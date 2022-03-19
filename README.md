@@ -204,3 +204,232 @@ void main()
                     break;
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    #include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* prev;
+    struct node* next;
+}*newnode,*temp,*temp1;
+struct node* head=NULL;
+struct node* tail=NULL;
+void create()
+{
+    int value;
+    int ch;
+    do{
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("enter the value");
+        scanf("%d",&value);
+        newnode->data=value;
+        newnode->prev=NULL;
+        newnode->next=NULL;
+        if(head==NULL)
+        {
+            head=newnode;
+            tail=newnode;
+        }
+        else
+        {
+        tail->next=newnode;
+        newnode->prev=tail;
+        tail=newnode;
+        }
+    printf("enter 1-continue,2-exit\n");
+    fflush(stdin);
+    scanf("%d",&ch);
+    }
+    while(ch==1);
+}
+void display()
+{
+    temp=head;
+    printf("operations on dll is");
+    while(temp->next!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->next;
+    }
+    
+}
+void insert_beg()
+{
+    int value;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter the value");
+    scanf("%d",&value);
+    newnode->data=value;
+    newnode->prev=NULL;
+    newnode->next=head;
+    head=newnode;
+}
+void insert_end()
+{
+    int value;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter the value");
+    scanf("%d",&value);
+    newnode->data=value;
+    tail->next=newnode;
+    newnode->prev=tail;
+    newnode->next=NULL;
+    tail=newnode;
+}
+void insert_pos()
+{
+    int value,pos;
+    int i;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter the value");
+    scanf("%d",&value);
+    printf("enter the position");
+    scanf("%d",&pos);
+    for(i=0;i<pos-1;i++)
+    {
+        temp=temp->next;
+    }
+    newnode->data=value;
+    newnode->next=temp->next;
+    newnode->prev=temp->next;
+    temp->next->prev=newnode;
+    temp->next=newnode;
+}
+void delete_beg()
+{
+    temp=head;
+    printf("enter the value to delete");
+    head=head->next;
+    temp->next=NULL;
+    head->prev=NULL;
+}
+void delete_end()
+{
+    temp=head;
+    printf("enter the value to delete");
+    while(temp->next==tail)
+    {
+        temp=temp->next;
+    }
+    tail=temp->prev;
+    temp->prev=NULL;
+    tail->next=NULL;
+}
+ void delete_pos()
+ {
+      int value,pos;
+    int i;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter the value");
+    scanf("%d",&value);
+    printf("enter the position");
+    scanf("%d",&pos);
+    for(i=0;i<pos-1;i++)
+    {
+        temp=temp->next;
+    }
+    temp1=temp->next;
+    temp->next=temp1->next;
+    temp->next->prev=temp;
+    temp1->prev=NULL;
+    temp1->next=NULL;
+ }
+
+void reverse()
+{
+    temp=tail;
+    while(temp->prev==NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->prev;
+    }
+}
+void count()
+{
+    int count;
+    while(temp->next!=NULL)
+{
+    printf("%d",temp->data);
+    temp=temp->next;
+    count++;
+}
+printf("%d",count);
+}
+void search()
+{
+    int value;
+    struct node*temp=head;
+    if(temp==NULL)
+    {
+       printf("no elemrnt");
+    }
+    else
+    {
+        while(temp!=NULL)
+        {
+            temp=temp->next;
+        }
+    }
+    printf("%d",temp->data);
+}
+int main()
+{
+    int choice;
+    printf("operations on dll is:");
+    printf("enter 1-create\n,2-display\n,3-insert_beg\n,4-insert_end\n");
+    printf("enter 5-insert_pos\n,6-delete_beg\n,7-delete_end\n");
+    printf("8-delete_pos\n,9-reverse\n,10-count\n,11-search\n");
+    printf("enter your choice");
+    scanf("%d",&choice);
+    while(choice<5)
+    {
+    switch(choice)
+    {
+        case 1:
+               create();
+               break;
+        case 2:
+                display();
+                break;
+        case 3:
+               insert_beg();
+               break;
+        case 4:
+               insert_end();
+               break;
+        case 5:
+               insert_pos();
+               break;
+        case 6:
+               delete_beg();
+               break;
+        case 7:
+               delete_end();
+               break;
+        case 8:
+               delete_pos();
+               break;
+        case 9:
+               reverse();
+               break;
+        case 10:
+               count();
+               break;
+        case 11:
+               search();
+               break;
+        
+        default:
+               printf("wrong choice");
+               break;
+    }
+}
+
+}
